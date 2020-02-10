@@ -9,12 +9,13 @@ from PyQt5 import QtWidgets, QtGui, QtCore, QtMultimediaWidgets
 from PyQt5.QtMultimedia import QMediaPlayer
 
 
-class Ui_ExamAppMaster(QtWidgets.QMainWindow):
+class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 	"""docstrbing for MyApp"""
-	def __init__(self, screen_size, parent=None):
-		super(Ui_ExamAppMaster, self).__init__(parent)
+	def __init__(self, screen_size, enabled, parent=None):
+		super(Ui_ExamAppCreator, self).__init__(parent)
 		self.screen_height = screen_size.height()
 		self.screen_width = round((self.screen_height - 32) * 1.3)
+		self.enabled = enabled
 		#print("Ori W=1200 New W={} Ori H=924 New W={}".format(self.screen_width,self.screen_height))
 		self.initUI()
 
@@ -71,6 +72,7 @@ class Ui_ExamAppMaster(QtWidgets.QMainWindow):
 		font.setItalic(True)
 		font.setWeight(75)
 		self.tabWidget.setFont(font)
+		self.tabWidget.setEnabled(self.enabled)
 
 		self.AnswerATab = QtWidgets.QWidget()
 		self.TabTextLayoutA = QtWidgets.QHBoxLayout(self.AnswerATab)
@@ -232,6 +234,7 @@ class Ui_ExamAppMaster(QtWidgets.QMainWindow):
 		self.ExamTitle.setText("Exam Title")
 		self.ExamTitle.setFont(font)
 		self.ExamTitle.setAlignment(QtCore.Qt.AlignTop)
+		# self.ExamTitle.setEnabled(False)
 
 		self.ExamTime = QtWidgets.QLabel(self.TopWidget)
 		self.ExamTime.setGeometry(95, 61, 201, 51)
@@ -310,6 +313,7 @@ class Ui_ExamAppMaster(QtWidgets.QMainWindow):
 		self.BackButton.setText("       Back")
 		self.BackButton.setIcon(QtGui.QIcon("img/back_button.png"))
 		self.BackButton.setIconSize(QtCore.QSize(32,32))
+		self.BackButton.setEnabled(self.enabled)
 
 		self.ForwardButton = QtWidgets.QPushButton(self.CheckboxFrame2)
 		self.ForwardButton.setGeometry(142, 6, 130, 32)
@@ -318,6 +322,7 @@ class Ui_ExamAppMaster(QtWidgets.QMainWindow):
 		self.ForwardButton.setText("         Next")
 		self.ForwardButton.setIcon(QtGui.QIcon("img/forward_button.png"))
 		self.ForwardButton.setIconSize(QtCore.QSize(32,32))
+		self.ForwardButton.setEnabled(self.enabled)
 
 	def tool_status_tips(self):
 		self.tabWidget.setStatusTip("Click to view possible answers.")
@@ -466,15 +471,15 @@ class Ui_CreateCSVWindow(object):
         self.label.setText(_translate("CreateCSVWindow", ":"))
         self.label_2.setText(_translate("CreateCSVWindow", ":"))
 
-if __name__ == '__main__':
-	app = QtWidgets.QApplication(sys.argv)
-	screen_size = QtWidgets.QDesktopWidget().availableGeometry()
-# 	#main_app = Ui_ExamLogin()
-# 	main_app = Ui_ExamQuestions()
-	main_app = Ui_ExamAppMaster(screen_size)
-	main_app.show()
+# if __name__ == '__main__':
+# 	app = QtWidgets.QApplication(sys.argv)
+# 	screen_size = QtWidgets.QDesktopWidget().availableGeometry()
+# # 	#main_app = Ui_ExamLogin()
+# # 	main_app = Ui_ExamQuestions()
+# 	main_app = Ui_ExamAppCreator(screen_size)
+# 	main_app.show()
 
-sys.exit(app.exec_())
+# sys.exit(app.exec_())
 
 # Copyright (c) 2020 Steven Walden
 #
