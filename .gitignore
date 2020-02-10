@@ -130,3 +130,5 @@ dmypy.json
 
 #my working docs
 create_CSV.py
+img/
+resources/
