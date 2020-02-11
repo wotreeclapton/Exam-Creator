@@ -53,7 +53,7 @@ class App(QtWidgets.QWidget):
 		self.CreateCSVWindow.show()
 
 	def load_data(self):
-		self.convert_dic = {'A':1,'B':2,'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9,'J':10,'k':11,'l':12,'M':13,'N':14,'O':15,'P':16,'Q':17,'R':18,'R':19,'S':20,'T':21,'U':22,'V':23,'W':24,'X':25,'Z':26,'AA':27,'AB':28,'AC':29,'AD':30,'AE':31,'AF':32,'AG':33,'AH':34,'AI':35}
+		self.convert_dic = {'A':1,'B':2,'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9,'J':10,'K':11,'l':12,'M':13,'N':14,'O':15,'P':16,'Q':17,'R':18,'S':19,'T':20,'U':21,'V':22,'W':23,'X':24,'Y':25,'Z':26,'AA':27,'AB':28,'AC':29,'AD':30,'AE':31,'AF':32,'AG':33,'AH':34,'AI':35}
 
 	def dark_theme(self):
 		app.setStyle("Fusion")
