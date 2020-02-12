@@ -360,9 +360,9 @@ class Ui_AboutWindow(QtWidgets.QWidget):
 
 	def add_labels(self):
 		self.AppLogo = QtWidgets.QLabel(self)
-		self.AppLogo.setMinimumSize(QtCore.QSize(100, 60))
-		self.AppLogo.setGeometry(self.geometry().width()/2 - self.AppLogo.width() / 2, 20, 100, 100)
-		self.AppLogo.setPixmap(QtGui.QPixmap("img/School logo75x97_grad.png"))
+		self.AppLogo.setMinimumSize(QtCore.QSize(160, 160))
+		self.AppLogo.setGeometry(self.geometry().width()/2 - self.AppLogo.width() / 2, 16, 160, 160)
+		self.AppLogo.setPixmap(QtGui.QPixmap("img/Ep logo160x160.png"))
 		self.AppLogo.setAlignment(QtCore.Qt.AlignCenter)
 
 		font = QtGui.QFont()
@@ -370,7 +370,7 @@ class Ui_AboutWindow(QtWidgets.QWidget):
 		font.setBold(True)
 		self.AppName = QtWidgets.QLabel(self)
 		self.AppName.setMinimumSize(QtCore.QSize(160, 50))
-		self.AppName.setGeometry(self.geometry().width()/2 - self.AppName.width() / 2, 180, 160, 50)
+		self.AppName.setGeometry(self.geometry().width()/2 - self.AppName.width() / 2, 184, 160, 50)
 		self.AppName.setText("Exam Creator")
 		self.AppName.setFont(font)
 		self.AppName.setAlignment(QtCore.Qt.AlignCenter)
@@ -379,7 +379,7 @@ class Ui_AboutWindow(QtWidgets.QWidget):
 		font.setBold(False)
 		self.VersionLabel = QtWidgets.QLabel(self)
 		self.VersionLabel.setMinimumSize(QtCore.QSize(120, 50))
-		self.VersionLabel.setGeometry(self.geometry().width()/2 - self.VersionLabel.width() / 2, 210, 120, 50)
+		self.VersionLabel.setGeometry(self.geometry().width()/2 - self.VersionLabel.width() / 2, 214, 120, 50)
 		self.VersionLabel.setText("")
 		self.VersionLabel.setFont(font)
 		self.VersionLabel.setAlignment(QtCore.Qt.AlignCenter)
