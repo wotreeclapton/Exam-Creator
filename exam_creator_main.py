@@ -15,7 +15,7 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QT_VERSION_STR, Qt, QUrl
 
-from app_guis import Ui_ExamAppCreator
+from app_guis import Ui_ExamAppCreator, Ui_AboutWindow
 import methods
 
 PY_VER = sys.version[:3]
@@ -31,7 +31,6 @@ class App(QtWidgets.QMainWindow):
 		methods.dark_theme(app)
 		self.load_data()
 		self.open_main_window()
-
 
 	def load_data(self):
 		pass
@@ -51,7 +50,7 @@ class App(QtWidgets.QMainWindow):
 		self.examcreator_gui.actionCreate_Examlist.triggered.connect(self.create_exam_list)
 		self.examcreator_gui.actionCreate_Studentlist.triggered.connect(self.create_student_list)
 		self.examcreator_gui.actionView_Help.triggered.connect(self.open_help)
-		self.examcreator_gui.actionAbout.triggered.connect(self.show_readme_file)
+		self.examcreator_gui.actionAbout.triggered.connect(self.open_about_window)
 		#set the text etc
 
 		#Show window
@@ -83,10 +82,16 @@ class App(QtWidgets.QMainWindow):
 
 	def open_help(self):
 		pass
+		#os.startfile('About.txt')
 
-	def show_readme_file(self):
-		os.startfile('About.txt')
+	def open_about_window(self):
+		self.about_window = Ui_AboutWindow()
+		self.about_window.setWindowTitle("About Exam Creator (Version: {})".format(__version__))
+		methods.screen_location(wn=self.about_window, win_type=False, avail_geom=self.screen_size)
 
+		self.about_window.VersionLabel.setText("version {}".format(__version__))
+
+		self.about_window.show()
 
 print(sys.executable)
 
