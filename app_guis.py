@@ -346,6 +346,60 @@ class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 		self.BackButton.setShortcut("Left")
 		self.ForwardButton.setShortcut("Return")
 
+class Ui_AboutWindow(QtWidgets.QWidget):
+	"""docstring for Ui_AboutWindow"""
+	def __init__(self, parent=None):
+		super(Ui_AboutWindow, self).__init__(parent)
+		self.resize(320, 360)
+		self.setMinimumSize(320, 360)
+		self.setMaximumSize(320, 360)
+		self.setWindowIcon(QtGui.QIcon("img/ep_program_logo_user_acc_zrP_icon.ico"))
+		self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
+
+		self.add_labels()
+
+	def add_labels(self):
+		self.AppLogo = QtWidgets.QLabel(self)
+		self.AppLogo.setMinimumSize(QtCore.QSize(160, 160))
+		self.AppLogo.setGeometry(self.geometry().width()/2 - self.AppLogo.width() / 2, 16, 160, 160)
+		self.AppLogo.setPixmap(QtGui.QPixmap("img/Ep logo160x160.png"))
+		self.AppLogo.setAlignment(QtCore.Qt.AlignCenter)
+
+		font = QtGui.QFont()
+		font.setPointSize(16)
+		font.setBold(True)
+		self.AppName = QtWidgets.QLabel(self)
+		self.AppName.setMinimumSize(QtCore.QSize(160, 50))
+		self.AppName.setGeometry(self.geometry().width()/2 - self.AppName.width() / 2, 184, 160, 50)
+		self.AppName.setText("Exam Creator")
+		self.AppName.setFont(font)
+		self.AppName.setAlignment(QtCore.Qt.AlignCenter)
+
+		font.setPointSize(10)
+		font.setBold(False)
+		self.VersionLabel = QtWidgets.QLabel(self)
+		self.VersionLabel.setMinimumSize(QtCore.QSize(120, 50))
+		self.VersionLabel.setGeometry(self.geometry().width()/2 - self.VersionLabel.width() / 2, 214, 120, 50)
+		self.VersionLabel.setText("")
+		self.VersionLabel.setFont(font)
+		self.VersionLabel.setAlignment(QtCore.Qt.AlignCenter)
+
+		font.setPointSize(11)
+		self.CopyrightLabel = QtWidgets.QLabel(self)
+		self.CopyrightLabel.setMinimumSize(QtCore.QSize(280, 50))
+		self.CopyrightLabel.setGeometry(self.geometry().width()/2 - self.CopyrightLabel.width() / 2, 260, 280, 50)
+		self.CopyrightLabel.setText("Copyright 2020 Mr Steven J Walden.")
+		self.CopyrightLabel.setFont(font)
+		self.CopyrightLabel.setAlignment(QtCore.Qt.AlignCenter)
+
+		font.setPointSize(10)
+		self.RightsLabel = QtWidgets.QLabel(self)
+		self.RightsLabel.setMinimumSize(QtCore.QSize(120, 50))
+		self.RightsLabel.setGeometry(self.geometry().width()/2 - self.RightsLabel.width() / 2, 290, 120, 50)
+		self.RightsLabel.setText("All rights reserved.")
+		self.RightsLabel.setFont(font)
+		self.RightsLabel.setAlignment(QtCore.Qt.AlignCenter)
+
 class Ui_CreateCSVWindow(object):
     def setupUi(self, CreateCSVWindow):
         CreateCSVWindow.setObjectName("CreateCSVWindow")
