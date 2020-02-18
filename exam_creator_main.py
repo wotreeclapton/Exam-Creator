@@ -11,6 +11,7 @@ __version__ = '1.0.0'
 
 import os
 import sys
+import csv
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QT_VERSION_STR, Qt, QUrl
@@ -27,9 +28,10 @@ class App(QtWidgets.QMainWindow):
 		super(App, self).__init__(parent)
 		self.screen_size = QtWidgets.QDesktopWidget().availableGeometry()
 		self.enabled = False
+		self.file_name = ('','')
 
 		methods.dark_theme(app)
-		self.load_data()
+		#self.load_data()
 		self.open_main_window()
 
 	def load_data(self):
@@ -57,19 +59,55 @@ class App(QtWidgets.QMainWindow):
 		self.examcreator_gui.show()
 
 	def new_file(self):
+		#Check to see if a file is open and has been changed
+		#either closes the file or asks if you want to save
+		#enable the main screen to work with
 		pass
 
 	def open_file(self):
-		pass
+		#Open file browser window and choose a csv file
+		self.file_name = QtWidgets.QFileDialog.getOpenFileName(parent=self, caption="Select CSV File", directory="./resources", filter="CSV Files (*.csv)")
+		#populate any lists/vairables by reading the csv file
+		try:
+			if self.file_name[0] != '':
+				with open(self.file_name[0], "r") as open_file:
+					csv_reader = csv.DictReader(open_file)
+					for line in csv_reader:
+						pass
+		except Exception as e:
+			#Open Message box with error message
+			print(e)
 
 	def save_file(self):
-		pass
+		#Check to see if already saved if not open file window same as save as
+		try:
+			if self.file_name[0] != '':
+				with open(self.file_name[0], "w") as new_file:
+					csv_writer = csv.writer(new_file, delimiter = ',')
+					csv_writer.writerow("First write")
+			else:
+				self.save_as_file()
+		except Exception as e:
+			#Open Message box with error message
+			print(e)
 
 	def save_as_file(self):
-		pass
+		#open save dialog window to save file
+		self.file_name = QtWidgets.QFileDialog.getSaveFileName(parent=self, caption="Save As", directory="./resources", filter="CSV Files (*.csv)")
+		try:
+			if self.file_name[0] != '':
+				with open(self.file_name[0], "w") as new_file:
+					csv_writer = csv.writer(new_file, delimiter = ',')
+					csv_writer.writerow("First write")
+		except Exception as e:
+			#Open Message box with error message
+			print(e)
 
 	def exit_app(self):
-		pass
+		#Check to see if the open file has been saved
+		#If file is not saved:
+			#Open a message box
+		sys.exit(app.exec_())
 
 	def create_class_list(self):
 		pass
