@@ -14,6 +14,7 @@ import sys
 import csv
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QT_VERSION_STR, Qt, QUrl
 
 from app_guis import Ui_ExamAppCreator, Ui_AboutWindow
@@ -29,6 +30,7 @@ class App(QtWidgets.QMainWindow):
 		self.screen_size = QtWidgets.QDesktopWidget().availableGeometry()
 		self.enabled = False
 		self.file_name = ('','')
+		self.file_modified = False #change this value when anything is modified
 
 		methods.dark_theme(app)
 		#self.load_data()
@@ -55,14 +57,28 @@ class App(QtWidgets.QMainWindow):
 		self.examcreator_gui.actionAbout.triggered.connect(self.open_about_window)
 		#set the text etc
 
+		self.examcreator_gui.closeEvent.connect(self.closeEvent1)
+
 		#Show window
 		self.examcreator_gui.show()
 
+	def closeEvent1(self, event):
+	    print ("Closing again")
+	    #self.destory()
+
 	def new_file(self):
 		#Check to see if a file is open and has been changed
-		#either closes the file or asks if you want to save
-		#enable the main screen to work with
-		pass
+		if self.file_name[0] != '' and self.file_modified:
+			#msg box do you want to save your changes
+			print('open msg box ask if you want to save your changes')
+			self.save_file()
+		elif self.file_name[0] == '' and self.file_modified:
+			# save a new file
+			self.save_as_file()
+		else:
+			#enable the main screen to work with
+			self.file_modified = True
+			print('new file open')
 
 	def open_file(self):
 		#Open file browser window and choose a csv file
@@ -85,7 +101,7 @@ class App(QtWidgets.QMainWindow):
 				with open(self.file_name[0], "w") as new_file:
 					csv_writer = csv.writer(new_file, delimiter = ',')
 					csv_writer.writerow("First write")
-			else:
+			elif self.file_modified:
 				self.save_as_file()
 		except Exception as e:
 			#Open Message box with error message
@@ -134,11 +150,11 @@ class App(QtWidgets.QMainWindow):
 print(sys.executable)
 
 if __name__ == '__main__':
-    print("Qt version:", QT_VERSION_STR)
-    print("Author:", __author__)
-    print("App version:",__version__)
+	print("Qt version:", QT_VERSION_STR)
+	print("Author:", __author__)
+	print("App version:",__version__)
 
-    app = QtWidgets.QApplication(sys.argv)
-    main_app = App()
+	app = QApplication(sys.argv)
+	main_app = App()
 
-sys.exit(app.exec_())
+	sys.exit(app.exec_())

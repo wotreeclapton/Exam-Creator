@@ -35,6 +35,10 @@ class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 		self.tab_order()
 		self.kb_shortcuts()
 
+	def closeEvent(self, event):
+	    print ("Closing")
+	    #self.destory()
+
 	def add_widgets(self):
 		self.centralwidget = QtWidgets.QWidget(self)
 
