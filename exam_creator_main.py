@@ -30,7 +30,7 @@ class App(QtWidgets.QMainWindow):
 		self.screen_size = QtWidgets.QDesktopWidget().availableGeometry()
 		self.enabled = False
 		self.file_name = ('','')
-		self.file_modified = False #change this value when anything is modified
+		self.file_modified = True #change this value when anything is modified
 
 		methods.dark_theme(app)
 		#self.load_data()
@@ -40,7 +40,7 @@ class App(QtWidgets.QMainWindow):
 		pass
 
 	def open_main_window(self):
-		self.examcreator_gui = Ui_ExamAppCreator(self.screen_size, enabled=self.enabled)
+		self.examcreator_gui = Ui_ExamAppCreator(self.screen_size, modified=self.file_modified)
 		methods.screen_location(wn=self.examcreator_gui, win_type=True, avail_geom=self.screen_size)
 		self.examcreator_gui.setWindowTitle("Exam Creator V{}".format(__version__))
 
@@ -57,14 +57,8 @@ class App(QtWidgets.QMainWindow):
 		self.examcreator_gui.actionAbout.triggered.connect(self.open_about_window)
 		#set the text etc
 
-		self.examcreator_gui.closeEvent.connect(self.closeEvent1)
-
 		#Show window
 		self.examcreator_gui.show()
-
-	def closeEvent1(self, event):
-	    print ("Closing again")
-	    #self.destory()
 
 	def new_file(self):
 		#Check to see if a file is open and has been changed

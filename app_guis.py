@@ -6,16 +6,17 @@
 
 import sys
 from PyQt5 import QtWidgets, QtGui, QtCore, QtMultimediaWidgets
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtMultimedia import QMediaPlayer
 
 
 class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 	"""docstrbing for MyApp"""
-	def __init__(self, screen_size, enabled, parent=None):
+	def __init__(self, screen_size, modified, parent=None):
 		super(Ui_ExamAppCreator, self).__init__(parent)
 		self.screen_height = screen_size.height()
 		self.screen_width = round((self.screen_height - 32) * 1.3)
-		self.enabled = enabled
+		self.modified = modified
 		#print("Ori W=1200 New W={} Ori H=924 New W={}".format(self.screen_width,self.screen_height))
 		self.initUI()
 
@@ -36,8 +37,29 @@ class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 		self.kb_shortcuts()
 
 	def closeEvent(self, event):
-	    print ("Closing")
-	    #self.destory()
+		if self.modified:
+			self.msgbox = QMessageBox()
+			self.msgbox.setWindowIcon(QtGui.QIcon("img/ep_program_logo_user_acc_zrP_icon.ico"))
+			self.msgbox.setIcon(QMessageBox.Warning)
+			self.msgbox.setWindowTitle("Exam Creator")
+			self.msgbox.setDefaultButton(QMessageBox.Save)
+			self.msgbox.setStandardButtons(QMessageBox.Save|QMessageBox.Discard|QMessageBox.Cancel)
+			self.msgbox.setWindowFlags(QtCore.Qt.CustomizeWindowHint | QtCore.Qt.WindowTitleHint)
+			self.msgbox.setText("Do you want to save changes to untitled?")
+
+			event.ignore()
+
+			if self.msgbox.exec() == QMessageBox.Discard:
+				event.accept()
+			elif self.msgbox.exec() == QMessageBox.Save:
+				print('Save it')
+			else:
+				event.ignore()
+			# 	event.ignore()
+			# if self.msgbox.exec() == QMessageBox.Cancel:
+			# 	event.ignore()
+
+		event.accept()
 
 	def add_widgets(self):
 		self.centralwidget = QtWidgets.QWidget(self)
@@ -76,7 +98,7 @@ class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 		font.setItalic(True)
 		font.setWeight(75)
 		self.tabWidget.setFont(font)
-		self.tabWidget.setEnabled(self.enabled)
+		self.tabWidget.setEnabled(False)
 
 		self.AnswerATab = QtWidgets.QWidget()
 		self.TabTextLayoutA = QtWidgets.QHBoxLayout(self.AnswerATab)
@@ -317,7 +339,7 @@ class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 		self.BackButton.setText("       Back")
 		self.BackButton.setIcon(QtGui.QIcon("img/back_button.png"))
 		self.BackButton.setIconSize(QtCore.QSize(32,32))
-		self.BackButton.setEnabled(self.enabled)
+		self.BackButton.setEnabled(False)
 
 		self.ForwardButton = QtWidgets.QPushButton(self.CheckboxFrame2)
 		self.ForwardButton.setGeometry(142, 6, 130, 32)
@@ -326,7 +348,7 @@ class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 		self.ForwardButton.setText("         Next")
 		self.ForwardButton.setIcon(QtGui.QIcon("img/forward_button.png"))
 		self.ForwardButton.setIconSize(QtCore.QSize(32,32))
-		self.ForwardButton.setEnabled(self.enabled)
+		self.ForwardButton.setEnabled(False)
 
 	def tool_status_tips(self):
 		self.tabWidget.setStatusTip("Click to view possible answers.")
