@@ -59,8 +59,6 @@ class Ui_ExamAppCreator(QtWidgets.QMainWindow):
 			# if self.msgbox.exec() == QMessageBox.Cancel:
 			# 	event.ignore()
 
-		event.accept()
-
 	def add_widgets(self):
 		self.centralwidget = QtWidgets.QWidget(self)
 
