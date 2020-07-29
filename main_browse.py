@@ -121,7 +121,7 @@ class App(QtWidgets.QWidget):
 		return self.convert_dic[val]
 
 	def write_csv(self):
-		self.read_list =[['Name','Nicknames','Passwords'],['Choose your name','Nickname','Password']]
+		self.read_list =[['Number','Name','Nicknames','Passwords'],['Student number','Choose your name','Nickname','Password']]
 		with open('Student_Details_CSV_' + self.sheet_name[-4:] + '.csv', 'w') as new_file:
 			csv_writer = csv.writer(new_file, delimiter = ',')
 
