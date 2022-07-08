@@ -1,4 +1,3 @@
-#! python 3
 '''
 EXAM CREATOR LAUNCHER developed by Mr Steven J walden
     Feb. 2020
